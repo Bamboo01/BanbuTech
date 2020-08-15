@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TangMath">
+      <UniqueIdentifier>{9caf1cda-aab5-4f39-9cd3-09ca694e7599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TohStuff">
+      <UniqueIdentifier>{cbd4036c-bd19-4290-9507-5f1bb03c8b94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\MatrixStack.cpp">
+      <Filter>TangMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mtx44.cpp">
+      <Filter>TangMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\timer.cpp">
+      <Filter>TangMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vector3.cpp">
+      <Filter>TangMath</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\MatrixStack.h">
+      <Filter>TangMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mtx44.h">
+      <Filter>TangMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyMath.h">
+      <Filter>TangMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\timer.h">
+      <Filter>TangMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector3.h">
+      <Filter>TangMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\filesystem.h">
+      <Filter>TohStuff</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

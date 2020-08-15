@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{d01c359d-6a92-4723-ab36-607683191e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneManager">
+      <UniqueIdentifier>{c2ffd5cb-8d3a-4c91-a6fc-0cef64cca290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneTest">
+      <UniqueIdentifier>{0b820b90-305b-4f72-9649-c7b9e59409e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{2edd94ae-f5bf-4615-a7c5-8c957fbde004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules">
+      <UniqueIdentifier>{df8f84d2-32db-4a14-87a6-7fd0b159466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Application">
+      <UniqueIdentifier>{87a6bbab-17b3-4989-9d6b-2918f230b247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager">
+      <UniqueIdentifier>{51547b29-8f45-446e-acfe-c92a917249ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\Heightmap">
+      <UniqueIdentifier>{6bfd3d60-0091-4ba5-950a-6163955c62e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\LoadOBJ">
+      <UniqueIdentifier>{408bbcad-94c0-43a5-a40f-e3653bf9bb33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\LoadTexture">
+      <UniqueIdentifier>{333b91ef-0ce9-4c80-af01-e4a685ec8056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\LoadTGA">
+      <UniqueIdentifier>{3aeaf02f-4bfc-4134-93d5-e8fedccb1fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\Mesh Stuff">
+      <UniqueIdentifier>{ab29f161-5347-4b97-be3e-56ee117bf094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\Mesh Stuff\Mesh">
+      <UniqueIdentifier>{0ece835e-13cc-491d-83ea-258f418f2315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\MeshManager\Mesh Stuff\MeshBuilder">
+      <UniqueIdentifier>{fb25909a-eb97-4f6d-826d-65f7ac94a46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Timer">
+      <UniqueIdentifier>{30f3bfbb-67d9-4f51-b005-8455cb832e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\ECS">
+      <UniqueIdentifier>{822d8357-31f3-472d-baaf-6fad7f5be8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Shader">
+      <UniqueIdentifier>{ad0c1022-073c-422e-b278-bd26449692e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Material">
+      <UniqueIdentifier>{52f21fc7-b236-46e4-ab72-490d2c05a37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Renderer">
+      <UniqueIdentifier>{193a6021-b3a8-4256-986d-96af8741a3ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\LightingManager">
+      <UniqueIdentifier>{1a05b9a0-b647-43c9-bd18-1c6795570b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\LightingManager\Light">
+      <UniqueIdentifier>{1783837c-aed5-49e7-bb44-d44b7b206c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Scene">
+      <UniqueIdentifier>{02289ff7-2a6e-4867-a580-7f970aeb21cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\Camera">
+      <UniqueIdentifier>{1a7d1b4c-c967-4b96-aff8-d6897a67de54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Modules\FBO">
+      <UniqueIdentifier>{859fb4c3-944c-41f3-bf8d-f26cbf30b9e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes">
+      <UniqueIdentifier>{cf092f62-3074-466f-8d70-cd972bd376ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes\Text">
+      <UniqueIdentifier>{0369c8e4-e705-4fb5-ba88-5c87598f4ed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes\AnimatedSprite">
+      <UniqueIdentifier>{dff78375-d62b-45ab-b1dd-5dfbb040d268}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Core Modules\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Core Modules\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadHmap.cpp">
+      <Filter>Core Modules\MeshManager\Heightmap</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Core Modules\MeshManager\LoadOBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTexture.cpp">
+      <Filter>Core Modules\MeshManager\LoadTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Core Modules\MeshManager\LoadTGA</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Meshes\AnimatedSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshManager.cpp">
+      <Filter>Core Modules\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DefaultShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneTest.cpp">
+      <Filter>Scenes\SceneTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Core Modules\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightingManager.cpp">
+      <Filter>Core Modules\LightingManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Core Modules\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FBO.cpp">
+      <Filter>Core Modules\FBO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Core Modules\MeshManager\Mesh Stuff\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Core Modules\MeshManager\Mesh Stuff\MeshBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextRenderer.cpp">
+      <Filter>Meshes\Text</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>Core Modules\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Core Modules\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ComponentArray.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ComponentManager.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Coordinator.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Signature.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SystemManager.h">
+      <Filter>Core Modules\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadHmap.h">
+      <Filter>Core Modules\MeshManager\Heightmap</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Core Modules\MeshManager\LoadOBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTexture.h">
+      <Filter>Core Modules\MeshManager\LoadTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Core Modules\MeshManager\LoadTGA</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Meshes\AnimatedSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Core Modules\MeshManager\Mesh Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshManager.h">
+      <Filter>Core Modules\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DefaultShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneTest.h">
+      <Filter>Scenes\SceneTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Core Modules\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer.h">
+      <Filter>Core Modules\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader.h">
+      <Filter>Core Modules\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Core Modules\LightingManager\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightingManager.h">
+      <Filter>Core Modules\LightingManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Core Modules\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Core Modules\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FBO.h">
+      <Filter>Core Modules\FBO</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Core Modules\MeshManager\Mesh Stuff\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Core Modules\MeshManager\Mesh Stuff\MeshBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextRenderer.h">
+      <Filter>Meshes\Text</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
