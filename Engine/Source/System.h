@@ -7,17 +7,14 @@ class System
 {
 public:
 	std::set<Entity> m_Entities;
-	virtual ~System() {};
-
-	/*
-	ANY SYSTEM MADE SHOULD GO IN THE FOLLOWING ORDER
-	1) Init
-	2) LateInit
-	3) Update
-	4) LateUpdate
-	5) PreRender
-	6) Render
-	7) PostRender
-	*/
+	System() {}
+	virtual ~System() {}
+	virtual void Setup() {}
+	virtual void Init() {}
+	virtual void EarlyUpdate(float dt) {}
+	virtual void Update(float dt) {}
+	virtual void LateUpdate(float dt) {}
+	virtual void Render() {}
+	virtual void OnCollision() {}
 };
 

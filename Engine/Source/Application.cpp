@@ -30,7 +30,6 @@ bool Application::exitProgram;
 SceneManager* SceneManager::instance;
 Coordinator coordinator;
 Renderer renderer;
-Shader* defaultShader;
 
 //Define an error callback
 static void error_callback(int error, const char* description)
@@ -169,7 +168,7 @@ void Application::Run()
 	Scene* scene = nullptr;
 	SceneManager* scenemanager = SceneManager::getInstance();
 	scenemanager->Init(&scene);
-	scenemanager->ChangeScene(SCENE_SHADOW);
+	scenemanager->ChangeScene(SCENE_TEST);
 	scenemanager->Update(m_timer.getElapsedTime());
 	
 

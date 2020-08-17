@@ -2,6 +2,7 @@
 
 SceneManager::SceneManager()
 {
+	sceneList[SCENE_TEST] = new SceneTest;
 	scene = nullptr;
 	swap = false;
 }

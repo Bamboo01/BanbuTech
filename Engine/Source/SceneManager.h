@@ -1,13 +1,11 @@
 #include "Scene.h"
-
+#include "SceneTest.h"
 
 #pragma once
 
 enum SCENE_TYPE
 {
 	SCENE_TEST,
-	SCENE_BASIC,
-	SCENE_SHADOW,
 	TOTAL_SCENES
 };
 

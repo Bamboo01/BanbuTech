@@ -14,7 +14,7 @@ MeshManager::MeshManager()
 	}
 
 	//Initialise your meshes here
-	meshList[MESH_AXES] = meshList[MESH_AXES] = MeshBuilder::GenerateAxes("reference");
+	meshList[GEO_AXES] =  MeshBuilder::GenerateAxes("reference");
 
 	for (int i = 0; i < NUM_MESH; i++)
 	{

@@ -70,16 +70,17 @@ void Mesh::Render()
 		return;
 	}
 	glBindVertexArray(vertexArray);
-	if (drawInstanced == true)
+
+	if (DynamicTransformMatrices.size() > 0)
 	{
 		glBufferSubData(GL_ARRAY_BUFFER, StaticTransformMatrices.size() * sizeof(glm::mat4), DynamicTransformMatrices.size() * sizeof(glm::mat4), &DynamicTransformMatrices[0]);
-		if (mode == DRAW_LINES)
-			glDrawElementsInstanced(GL_LINES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
-		else if (mode == DRAW_TRIANGLE_STRIP)
-			glDrawElementsInstanced(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
-		else
-			glDrawElementsInstanced(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
 	}
+	if (mode == DRAW_LINES)
+		glDrawElementsInstanced(GL_LINES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
+	else if (mode == DRAW_TRIANGLE_STRIP)
+		glDrawElementsInstanced(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
+	else
+		glDrawElementsInstanced(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
 
 	glBindVertexArray(0);
 }

@@ -162,49 +162,47 @@ public:
 	//Essential, reminder to run these in your children shaders >:(
 	virtual void InitShader()
 	{
-		MaterialUniforms[U_MATERIAL_COLOR] = GetUniformLocation("material.kColor");
-		MaterialUniforms[U_MATERIAL_AMBIENT] = GetUniformLocation("material.kAmbient");
-		MaterialUniforms[U_MATERIAL_DIFFUSE] = GetUniformLocation("material.kDiffuse");
-		MaterialUniforms[U_MATERIAL_SPECULAR] = GetUniformLocation("material.kSpecular");
-		MaterialUniforms[U_MATERIAL_SHININESS] = GetUniformLocation("material.kShininess");
+		MaterialUniforms[U_MATERIAL_COLOR] = getUniformLocation("material.kColor");
+		MaterialUniforms[U_MATERIAL_AMBIENT] = getUniformLocation("material.kAmbient");
+		MaterialUniforms[U_MATERIAL_DIFFUSE] = getUniformLocation("material.kDiffuse");
+		MaterialUniforms[U_MATERIAL_SPECULAR] = getUniformLocation("material.kSpecular");
+		MaterialUniforms[U_MATERIAL_SHININESS] = getUniformLocation("material.kShininess");
 
-		MaterialUniforms[U_COLOR_TEXTURE0] = GetUniformLocation("material.colorTexture[0]");
-		MaterialUniforms[U_COLOR_TEXTURE1] = GetUniformLocation("material.colorTexture[1]");
-		MaterialUniforms[U_COLOR_TEXTURE2] = GetUniformLocation("material.colorTexture[2]");
-		MaterialUniforms[U_COLOR_TEXTURE3] = GetUniformLocation("material.colorTexture[3]");
-		MaterialUniforms[U_COLOR_TEXTURE4] = GetUniformLocation("material.colorTexture[4]");
-		MaterialUniforms[U_COLOR_TEXTURE5] = GetUniformLocation("material.colorTexture[5]");
-		MaterialUniforms[U_COLOR_TEXTURE6] = GetUniformLocation("material.colorTexture[6]");
-		MaterialUniforms[U_COLOR_TEXTURE7] = GetUniformLocation("material.colorTexture[7]");
-		MaterialUniforms[U_COLOR_TEXTURE_NUM] = GetUniformLocation("material.colorTextureNum");
+		MaterialUniforms[U_COLOR_TEXTURE0] = getUniformLocation("material.colorTexture[0]");
+		MaterialUniforms[U_COLOR_TEXTURE1] = getUniformLocation("material.colorTexture[1]");
+		MaterialUniforms[U_COLOR_TEXTURE2] = getUniformLocation("material.colorTexture[2]");
+		MaterialUniforms[U_COLOR_TEXTURE3] = getUniformLocation("material.colorTexture[3]");
+		MaterialUniforms[U_COLOR_TEXTURE4] = getUniformLocation("material.colorTexture[4]");
+		MaterialUniforms[U_COLOR_TEXTURE5] = getUniformLocation("material.colorTexture[5]");
+		MaterialUniforms[U_COLOR_TEXTURE6] = getUniformLocation("material.colorTexture[6]");
+		MaterialUniforms[U_COLOR_TEXTURE7] = getUniformLocation("material.colorTexture[7]");
+		MaterialUniforms[U_COLOR_TEXTURE_NUM] = getUniformLocation("material.colorTextureNum");
 
-		MaterialUniforms[U_MATERIAL_SPECULAR_MAP] = GetUniformLocation("material.SpecularMap");
-		MaterialUniforms[U_MATERIAL_SPECULAR_MAP_ENABLED] = GetUniformLocation("material.SpecularMapEnabled");
+		MaterialUniforms[U_MATERIAL_SPECULAR_MAP] = getUniformLocation("material.SpecularMap");
+		MaterialUniforms[U_MATERIAL_SPECULAR_MAP_ENABLED] = getUniformLocation("material.SpecularMapEnabled");
 	}
 
-	virtual void UpdateShader(Material material)
+	virtual void UpdateShader(Material* material)
 	{
-		setVec3(MaterialUniforms[U_MATERIAL_COLOR], material.kColor);
-		setVec3(MaterialUniforms[U_MATERIAL_AMBIENT], material.kAmbient);
-		setVec3(MaterialUniforms[U_MATERIAL_DIFFUSE], material.kDiffuse);
-		setVec3(MaterialUniforms[U_MATERIAL_SPECULAR], material.kSpecular);
-		setFloat(MaterialUniforms[U_MATERIAL_SHININESS], material.kShininess);
-
-		for (int i = 0; i < material.numTexture; i++)
+		if (!material)
 		{
-			setInt(MaterialUniforms[U_COLOR_TEXTURE0 + i], material.colorTexture[i]);
+			return;
 		}
-		setInt(MaterialUniforms[U_COLOR_TEXTURE_NUM], material.numTexture);
+		setVec3(MaterialUniforms[U_MATERIAL_COLOR], material->kColor);
+		setVec3(MaterialUniforms[U_MATERIAL_AMBIENT], material->kAmbient);
+		setVec3(MaterialUniforms[U_MATERIAL_DIFFUSE], material->kDiffuse);
+		setVec3(MaterialUniforms[U_MATERIAL_SPECULAR], material->kSpecular);
+		setFloat(MaterialUniforms[U_MATERIAL_SHININESS], material->kShininess);
 
-		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP], material.specularMap);
-		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP_ENABLED], material.specularMapEnabled);
+		for (int i = 0; i < material->numTexture; i++)
+		{
+			setInt(MaterialUniforms[U_COLOR_TEXTURE0 + i], material->colorTexture[i]);
+		}
+		setInt(MaterialUniforms[U_COLOR_TEXTURE_NUM], material->numTexture);
+
+		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP], material->specularMap);
+		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP_ENABLED], material->specularMapEnabled);
 	}
-
-    unsigned GetUniformLocation(std::string name)
-    {
-        return glGetUniformLocation(ID, name.c_str());
-    }
-
     void UseShader()
     {
         glUseProgram(ID);
@@ -212,6 +210,21 @@ public:
 
 
 	//Utility uniform functions
+	unsigned getUniformLocation(std::string name)
+	{
+		return glGetUniformLocation(ID, name.c_str());
+	}
+
+	unsigned getUniformBlock(std::string name)
+	{
+		return glGetUniformBlockIndex(ID, name.c_str());
+	}
+
+	void bindUniformBlock(unsigned index, unsigned location)
+	{
+		glUniformBlockBinding(ID, index, location);
+	}
+
 	void setBool(unsigned location, bool value) const
 	{
 		glUniform1i(location, (int)value);
@@ -273,7 +286,5 @@ public:
 	}
 
 	const PROCESS_TYPE &proccess_type = processtype;
-
-	operator unsigned() const { return ID; }
 };
 #endif

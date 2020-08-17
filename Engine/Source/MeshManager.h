@@ -4,9 +4,9 @@
 
 #pragma once
 
-enum MESH_TYPE
+enum GEO_TYPE
 {
-	MESH_AXES,
+	GEO_AXES,
 	NUM_MESH
 };
 
@@ -17,10 +17,8 @@ public:
 	MeshManager();
 	~MeshManager();
 	Mesh* meshList[NUM_MESH];
-	
 	std::unordered_map<Mesh*, SpriteAnimation> animList;
 	std::unordered_map <Mesh*, std::vector<unsigned char>> m_terrainList;
-
 	void Update(float dt);
 };
 

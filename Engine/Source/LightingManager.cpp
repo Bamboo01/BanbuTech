@@ -5,8 +5,8 @@ void LightingManager::InitLights(std::vector<Shader*> shaders)
 	/*Assignment of uniform blocks*/
 	for (auto shader : shaders)
 	{
-		unsigned uniformblockMatrice = glGetUniformBlockIndex(*shader, "LightBlock");
-		glUniformBlockBinding(*shader, uniformblockMatrice, 1);
+		unsigned uniformblockLight = shader->getUniformBlock("LightBlock");
+		shader->bindUniformBlock(uniformblockLight, 1);
 	}
 
 	glGenBuffers(1, &LightUBO);

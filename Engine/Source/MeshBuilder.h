@@ -25,15 +25,13 @@ public:
 	static Mesh* GenerateCone(const std::string &meshName, Color color, unsigned numSlice, float radius, float height);
 	static Mesh* GenerateOBJ(const std::string &meshName, const std::string &file_path);
 	static Mesh* GenerateText(const std::string &meshName, unsigned row, unsigned col);
-
-	//TSL
 	static Mesh* GenerateSkyPlane(const std::string &meshName, Color color, int slices,float PlanetRadius, float AtmosphereRadius, float hTile, float vTile);
 	static Mesh* GenerateColliderBox(const std::string& meshName, Color color, float lengthX, float lengthY, float lengthZ);
 	static Mesh* GenerateColliderSphere(const std::string& meshName, Color color, unsigned numStack, unsigned numSlice, float radius);
 	static Mesh* GenerateTerrain(const std::string& meshName, const std::string& file_path, std::vector<unsigned char>& heightMap);
-
-	//mmm generate hemisphere
 	static Mesh* GenerateSkyDome(const std::string& meshName, Color color, unsigned numStack, unsigned numSlice, float radius);
+
+	//Custom Meshes
 	static SpriteAnimation* GenerateSpriteAnimation(const std::string& meshName, unsigned numRow, unsigned numCol);
 
 };

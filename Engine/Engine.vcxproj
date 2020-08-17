@@ -160,11 +160,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\RenderSystem.cpp" />
+    <ClCompile Include="Source\CameraSystem.cpp" />
+    <ClCompile Include="Source\ScreenQuad.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\FBO.cpp" />
     <ClCompile Include="Source\LightingManager.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
-    <ClCompile Include="Source\DefaultShader.cpp" />
     <ClCompile Include="Source\SceneTest.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\LoadHmap.cpp" />
@@ -179,14 +181,18 @@
     <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\TextRenderer.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\TransformSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\RenderSystem.h" />
+    <ClInclude Include="Source\CameraSystem.h" />
+    <ClInclude Include="Source\RenderData.h" />
+    <ClInclude Include="Source\ScreenQuad.h" />
     <ClInclude Include="Source\FBO.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\LightingManager.h" />
     <ClInclude Include="Source\Renderer.h" />
-    <ClInclude Include="Source\DefaultShader.h" />
     <ClInclude Include="Source\SceneTest.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Component.h" />
@@ -213,6 +219,8 @@
     <ClInclude Include="Source\TextRenderer.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\TransformSystem.h" />
+    <ClInclude Include="Source\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">

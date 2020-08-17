@@ -2,6 +2,7 @@
 #include "ComponentArray.h"
 #include <assert.h>
 #include <memory>
+#include <iostream>
 
 class ComponentManager
 {

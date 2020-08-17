@@ -26,12 +26,23 @@ void Renderer::assignMaterialtoMesh(Mesh* mesh, Material* material)
 	MeshtoMaterial[mesh] = material;
 }
 
+Mesh* Renderer::getMesh(GEO_TYPE type)
+{
+	return meshManager->meshList[type];
+}
+
 void Renderer::Init()
 {
 	addMaterial(new Material, new Shader("Shader///basic.vs", "Shader//basic.fs"));
 	meshManager = new MeshManager;
 	defaultMaterial = materialManager[0];
 	defaultShader = shaderManager[0];
+
+	//Add a post processing shader here if you want
+	postProcessingShader = nullptr;
+
+	screenQuad = new ScreenQuad;
+	screenQuad->Init();
 
 	for (auto mesh : meshManager->meshList)
 	{
@@ -51,30 +62,15 @@ void Renderer::Init()
 	/*Assignment of uniform blocks*/
 	for (auto shader : shaderManager)
 	{
-		unsigned uniformblockMatrice = glGetUniformBlockIndex(*shader, "MatricesBlock");
-		glUniformBlockBinding(*shader, uniformblockMatrice, 0);
-		std::cout << glGetError() << std::endl;
+		unsigned uniformblockMatrice = shader->getUniformBlock("MatricesBlock");
+		shader->bindUniformBlock(uniformblockMatrice, 0);
 	}
 
 	glGenBuffers(1, &MatriceUBO);
-	std::cout << glGetError() << std::endl;
 	glBindBuffer(GL_UNIFORM_BUFFER, MatriceUBO);
-	std::cout << glGetError() << std::endl;
 	glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
-	std::cout << glGetError() << std::endl;
 	glBindBufferRange(GL_UNIFORM_BUFFER, 0, MatriceUBO, 0, 2 * sizeof(glm::mat4));
-	std::cout << glGetError() << std::endl;
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	std::cout << glGetError() << std::endl;
 }
-
-/*
-layout (std140) uniform Matrices
-{
-	mat4 projection;
-	mat4 view;
-};
-*/
 
 void Renderer::Update(float dt)
 {
@@ -87,43 +83,106 @@ void Renderer::Update(float dt)
 	meshManager->Update(dt);
 }
 
-void Renderer::Render(Camera camera)
+void Renderer::Render(Camera& camera, bool useCameraShader)
+{
+	if (useCameraShader)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_BUFFER);
+		glViewport(0, 0, camera.viewWidth, camera.viewHeight);
+
+		glBindBuffer(GL_UNIFORM_BUFFER, MatriceUBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(camera.getProjectionMatrix()));
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(camera.getViewMatrix()));
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		if (!camera.getPostProcessingShader())
+		{
+			std::cout << "Camera has no shader attached!" << std::endl;
+			return;
+		}
+
+		for (auto mesh : meshManager->meshList)
+		{
+			camera.getPostProcessingShader()->UseShader();
+			camera.getPostProcessingShader()->UpdateShader(nullptr);
+			mesh->Render();
+		}
+	}
+	else
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_BUFFER);
+		glViewport(0, 0, camera.viewWidth, camera.viewHeight);
+
+		glBindBuffer(GL_UNIFORM_BUFFER, MatriceUBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(camera.getProjectionMatrix()));
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(camera.getViewMatrix()));
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		lightingManager.BufferLights();
+
+		for (auto mesh : meshManager->meshList)
+		{
+			Shader* shader;
+			Material* material;
+
+			material = MeshtoMaterial[mesh];
+			if (material == nullptr)
+			{
+				material = defaultMaterial;
+				shader = defaultShader;
+			}
+			else
+			{
+				shader = MaterialtoShader[material];
+				if (shader == nullptr)
+				{
+					shader = defaultShader;
+				}
+			}
+			shader->UseShader();
+			shader->UpdateShader(material);
+			mesh->Render();
+		}
+	}
+
+
+	camera.UpdateAssignedTextures();
+
+	if (camera.type == CAMERA_TYPE::CAMERA_MAIN)
+	{
+		screenQuad->screenTexture = camera.FBO->GetFBO();
+	}
+}
+
+
+void Renderer::RenderScreenQuad()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_BUFFER);
-
-	glBindBuffer(GL_UNIFORM_BUFFER, MatriceUBO);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(camera.ProjectionMatrix));
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(camera.ViewMatrix));
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	lightingManager.BufferLights();
-
-	for (auto mesh : meshManager->meshList)
+	glDisable(GL_DEPTH_TEST);
+	glViewport(0, 0, Application::GetWindowWidth(), Application::GetWindowHeight());
+	if (postProcessingShader)
 	{
-		Shader* shader;
-		Material* material;
-
-		material = MeshtoMaterial[mesh];
-		if (material == nullptr)
-		{
-			material = defaultMaterial;
-			shader = defaultShader;
-		}
-		else
-		{
-			shader = MaterialtoShader[material];
-			if (shader == nullptr)
-			{
-				shader = defaultShader;
-			}
-		}
-		glUseProgram(*shader);
-		shader->UpdateShader(*material);
-		mesh->Render();
+		postProcessingShader->UseShader();
 	}
+	else
+	{
+		screenQuad->defaultScreenShader->UseShader();
+	}
+	screenQuad->Render();
+	glEnable(GL_DEPTH_TEST);
 }

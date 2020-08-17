@@ -7,13 +7,6 @@
 #define MATERIAL_H
 #define MAX_TEXTURES 8
 
-//struct MaterialComponent
-//{
-//	float r, g, b;
-//	MaterialComponent(float r = 0.1f, float g = 0.1f, float b = 0.1f) {Set(r, g, b);}
-//	void Set(float r, float g, float b) {this->r = r; this->g = g; this->b = b;}
-//};
-
 struct Material
 {
 	glm::vec3 kColor;
@@ -28,7 +21,6 @@ struct Material
 	unsigned specularMap;
 	bool specularMapEnabled;	
 
-	
 	bool lightEnabled;
 
 	Material()
