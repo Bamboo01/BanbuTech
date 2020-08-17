@@ -73,6 +73,7 @@ void Mesh::Render()
 
 	if (DynamicTransformMatrices.size() > 0)
 	{
+		glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
 		glBufferSubData(GL_ARRAY_BUFFER, StaticTransformMatrices.size() * sizeof(glm::mat4), DynamicTransformMatrices.size() * sizeof(glm::mat4), &DynamicTransformMatrices[0]);
 	}
 	if (mode == DRAW_LINES)

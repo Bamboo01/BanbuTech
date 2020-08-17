@@ -116,7 +116,7 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 	}
 	else
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		camera.FBO->BindForWriting();
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
@@ -155,14 +155,15 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 			shader->UpdateShader(material);
 			mesh->Render();
 		}
-	}
 
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
 
 	camera.UpdateAssignedTextures();
 
 	if (camera.type == CAMERA_TYPE::CAMERA_MAIN)
 	{
-		screenQuad->screenTexture = camera.FBO->GetFBO();
+		screenQuad->screenTexture = camera.FBO->GetFrame();
 	}
 }
 

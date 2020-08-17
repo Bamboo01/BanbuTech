@@ -55,5 +55,6 @@ void RenderSystem::Render()
 			render.mesh->DynamicTransformMatrices.push_back(model);
 		}
 	}
-	renderer.RenderScreenQuad();
+
+	//renderer.RenderScreenQuad();
 }

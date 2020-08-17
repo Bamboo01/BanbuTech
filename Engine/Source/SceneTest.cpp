@@ -18,7 +18,7 @@ void SceneTest::Init()
 
 	Entity maincamera = coordinator.CreateEntity();
 	coordinator.AddComponent<Camera>(maincamera, Camera(
-		glm::vec3(0, 0, 0),
+		glm::vec3(0, 0, -3.f),
 		glm::vec3(0, 0, 0),
 		800, 600,
 		45.f, 
@@ -29,6 +29,11 @@ void SceneTest::Init()
 	Entity axes = coordinator.CreateEntity();
 	coordinator.AddComponent<RenderData>(axes, RenderData(renderer.getMesh(GEO_AXES), false, MESH_TYPE::STATIC_MESH));
 	coordinator.AddComponent<Transform>(axes, Transform());
+
+	Entity cube = coordinator.CreateEntity();
+	coordinator.AddComponent<RenderData>(cube, RenderData(renderer.getMesh(GEO_CUBE), false, MESH_TYPE::DYNAMIC_MESH));
+	coordinator.AddComponent<Transform>(cube, Transform());
+	coordinator.GetComponent<Transform>(cube).rotation = glm::vec3(30.f, 60.f, 0.f);
 
 	/*Init all systes*/
 	camerasystem->Init();
@@ -44,6 +49,7 @@ void SceneTest::Update(double dt)
 {
 	transformsystem->Update(dt);
 	camerasystem->Update(dt);
+	rendersystem->Update(dt);
 }
 
 void SceneTest::LateUpdate(double dt)
@@ -56,6 +62,7 @@ void SceneTest::PreRender()
 
 void SceneTest::Render()
 {
+	rendersystem->Render();
 	camerasystem->Render();
 }
 

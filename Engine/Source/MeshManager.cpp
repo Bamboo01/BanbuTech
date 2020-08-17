@@ -15,6 +15,7 @@ MeshManager::MeshManager()
 
 	//Initialise your meshes here
 	meshList[GEO_AXES] =  MeshBuilder::GenerateAxes("reference");
+	meshList[GEO_CUBE] =  MeshBuilder::GenerateCube("cube", Color(1.f, 1.f, 1.f));
 
 	for (int i = 0; i < NUM_MESH; i++)
 	{
