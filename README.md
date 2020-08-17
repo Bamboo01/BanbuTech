@@ -1,2 +1,2 @@
 # BanbuTech
- Simple, Robust, like bamboo.
+ Simple, Robust. Like bamboo.
