@@ -11,6 +11,7 @@ void ScreenQuad::Init()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
@@ -42,30 +43,27 @@ ScreenQuad::ScreenQuad() : Mesh("ScreenQuad")
 	/*
 	This is Mr Toh level coding but I legit need a screen quad set up LOL
 	*/
+	float length = 1.f;
+	Color color = Color(1, 1, 1);
 	Vertex v;
 	std::vector<Vertex> vertex_buffer_data;
 	std::vector<GLuint> index_buffer_data;
-	float length = 2.f;
-	Color color = Color(1, 1, 1);
 
 	v.pos.Set(-0.5f * length, -0.5f * length, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(0, 0);
 	vertex_buffer_data.push_back(v);
-
 	v.pos.Set(0.5f * length, -0.5f * length, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(1.0f, 0);
 	vertex_buffer_data.push_back(v);
-
 	v.pos.Set(0.5f * length, 0.5f * length, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(1.0f, 1.0f);
 	vertex_buffer_data.push_back(v);
-
 	v.pos.Set(-0.5f * length, 0.5f * length, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
@@ -86,6 +84,7 @@ ScreenQuad::ScreenQuad() : Mesh("ScreenQuad")
 
 	this->indexSize = index_buffer_data.size();
 	this->mode = Mesh::DRAW_TRIANGLES;
+
 	defaultScreenShader = new Shader("Shader//screenquad.vs", "Shader//screenquad.fs");
 }
 
