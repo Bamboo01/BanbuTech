@@ -28,6 +28,8 @@ void RenderSystem::Init()
 			render.mesh->StaticTransformMatrices.push_back(model);
 		}
 	}
+	/*Buffering of all static models*/
+	renderer.BufferStaticModels();
 }
 
 void RenderSystem::Update(float dt)

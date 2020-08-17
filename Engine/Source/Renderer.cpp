@@ -87,11 +87,12 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 {
 	if (useCameraShader)
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		camera.FBO->BindForWriting();
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_DEPTH_BUFFER);
 		glViewport(0, 0, camera.viewWidth, camera.viewHeight);
@@ -100,6 +101,8 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(camera.getProjectionMatrix()));
 		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(camera.getViewMatrix()));
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		lightingManager.BufferLights();
 
 		if (!camera.getPostProcessingShader())
 		{
@@ -121,6 +124,7 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_DEPTH_BUFFER);
 		glViewport(0, 0, camera.viewWidth, camera.viewHeight);
@@ -171,11 +175,13 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 void Renderer::RenderScreenQuad()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, Application::GetWindowWidth(), Application::GetWindowHeight());
+
 	if (postProcessingShader)
 	{
 		postProcessingShader->UseShader();
@@ -186,4 +192,12 @@ void Renderer::RenderScreenQuad()
 	}
 	screenQuad->Render();
 	glEnable(GL_DEPTH_TEST);
+}
+
+void Renderer::BufferStaticModels()
+{
+	for (auto mesh : meshManager->meshList)
+	{
+		mesh->BufferStaticModels();
+	}
 }

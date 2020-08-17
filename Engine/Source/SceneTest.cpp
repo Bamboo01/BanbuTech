@@ -21,7 +21,7 @@ void SceneTest::Init()
 		glm::vec3(0, 0, -3.f),
 		glm::vec3(0, 0, 0),
 		800, 600,
-		45.f, 
+		90.f, 
 		CAMERA_TYPE::CAMERA_MAIN,
 		CAMERA_MODE::MODE_PERSPECTIVE
 	));
@@ -29,12 +29,18 @@ void SceneTest::Init()
 	Entity axes = coordinator.CreateEntity();
 	coordinator.AddComponent<RenderData>(axes, RenderData(renderer.getMesh(GEO_AXES), false, MESH_TYPE::STATIC_MESH));
 	coordinator.AddComponent<Transform>(axes, Transform());
-
-	Entity cube = coordinator.CreateEntity();
-	coordinator.AddComponent<RenderData>(cube, RenderData(renderer.getMesh(GEO_CUBE), false, MESH_TYPE::DYNAMIC_MESH));
-	coordinator.AddComponent<Transform>(cube, Transform());
-	coordinator.GetComponent<Transform>(cube).rotation = glm::vec3(30.f, 60.f, 0.f);
-
+	Math::InitRNG();
+	for (int i = 0; i < 9998; i++)
+	{
+		int x = Math::RandIntMinMax(-100, 100);
+		int y = Math::RandIntMinMax(-100, 100);
+		int z = Math::RandIntMinMax(-100, 100);
+		Entity cube = coordinator.CreateEntity();
+		coordinator.AddComponent<RenderData>(cube, RenderData(renderer.getMesh(GEO_CUBE), false, MESH_TYPE::STATIC_MESH));
+		coordinator.AddComponent<Transform>(cube, Transform());
+		coordinator.GetComponent<Transform>(cube).rotation = glm::vec3(30.f, 60.f, 0.f);
+		coordinator.GetComponent<Transform>(cube).position = glm::vec3(x, y, z);
+	}
 	/*Init all systes*/
 	camerasystem->Init();
 	rendersystem->Init();

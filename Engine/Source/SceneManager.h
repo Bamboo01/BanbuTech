@@ -23,7 +23,7 @@ public:
 	
 	void Init(Scene** s);
 	void ChangeScene(SCENE_TYPE scenetype);
-	void Update(float dt);
+	void Update();
 	static SceneManager* getInstance();
 
 	~SceneManager();

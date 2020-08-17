@@ -1,5 +1,7 @@
 #include "CameraSystem.h"
 
+#include "Application.h"
+
 void CameraSystem::Setup()
 {
 	Signature signature;
@@ -21,6 +23,16 @@ void CameraSystem::Update(float dt)
 	for (auto const& entity : m_Entities)
 	{
 		auto& camera = coordinator.GetComponent<Camera>(entity);
+
+		if (Application::IsKeyPressed('A'))
+		{
+			camera.position.x -= dt * 50.f;
+		}
+		if (Application::IsKeyPressed('D'))
+		{
+			camera.position.x += dt * 50.f;
+		}
+		
 		glm::mat4 rot(1.f);
 		glm::vec3 rotation = glm::radians(camera.rotation);
 

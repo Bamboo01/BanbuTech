@@ -20,7 +20,8 @@ public:
 	Mesh(const std::string &meshName);
 	virtual ~Mesh();
 
-	virtual void Init();
+	virtual void Init(int numberofstaticmodels = 1000);
+	virtual void BufferStaticModels();
 	virtual void Render();
 
 	const std::string name;

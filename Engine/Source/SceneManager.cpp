@@ -20,7 +20,7 @@ void SceneManager::ChangeScene(SCENE_TYPE scenetype)
 	currentScene = scenetype;
 }
 
-void SceneManager::Update(float dt)
+void SceneManager::Update()
 {
 	if (swap == true)
 	{
@@ -32,9 +32,9 @@ void SceneManager::Update(float dt)
 		}
 		*scene = sceneList[currentScene]->Clone();
 		(*scene)->Init();
-		(*scene)->EarlyUpdate(dt);
-		(*scene)->Update(dt);
-		(*scene)->LateUpdate(dt);
+		(*scene)->EarlyUpdate(0);
+		(*scene)->Update(0);
+		(*scene)->LateUpdate(0);
 		swap = false;
 	}
 }

@@ -128,7 +128,7 @@ void Application::Init()
 
 
 	//Create a window and create its OpenGL context
-	m_window = glfwCreateWindow(m_window_width, m_window_height, "DM2210_Framework", NULL, NULL);
+	m_window = glfwCreateWindow(m_window_width, m_window_height, "Banbutech V0.01", NULL, NULL);
 
 	//If the window couldn't be created
 	if (!m_window)
@@ -169,7 +169,7 @@ void Application::Run()
 	SceneManager* scenemanager = SceneManager::getInstance();
 	scenemanager->Init(&scene);
 	scenemanager->ChangeScene(SCENE_TEST);
-	scenemanager->Update(m_timer.getElapsedTime());
+	scenemanager->Update();
 	
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
@@ -180,16 +180,18 @@ void Application::Run()
 			break;
 		}
 		GetMouseUpdate();
-
-		scene->EarlyUpdate(m_timer.getElapsedTime());
-		scene->Update(m_timer.getElapsedTime());
-		scene->LateUpdate(m_timer.getElapsedTime());
+		float timer = m_timer.getElapsedTime();
+		scene->EarlyUpdate(timer);
+		scene->Update(timer);
+		scene->LateUpdate(timer);
 
 		scene->PreRender();
 		scene->Render();
 		scene->PostRender();
 
-		scenemanager->Update(m_timer.getElapsedTime());
+		scenemanager->Update();
+
+		std::cout << 1.f / timer << std::endl;
 
 		//Swap buffers
 		glfwSwapBuffers(m_window);

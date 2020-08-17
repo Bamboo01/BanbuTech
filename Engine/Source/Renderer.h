@@ -8,27 +8,29 @@
 #include "LightingManager.h"
 #include "ScreenQuad.h"
 
-#define MAX_LIGHTS 64
-
 #pragma once
 
 class Renderer
 {
 private:
+	//Mesh, material, shaders
 	std::map<Material*, Shader*> MaterialtoShader;
 	std::map<Mesh*, Material*> MeshtoMaterial;
 	MeshManager* meshManager;
 	std::vector<Shader*> shaderManager;
 	std::vector<Material*> materialManager;
+
+	//Matrice UBO
+	unsigned MatriceUBO;
+
+	//Default Stuff
 	Material* defaultMaterial;
 	Shader* defaultShader;
-	unsigned MatriceUBO;
-	LightingManager lightingManager;
-
 	Shader* postProcessingShader;
 	ScreenQuad* screenQuad;
 	
-	
+	//Add-ons to the rendering pipeline
+	LightingManager lightingManager;
 
 	void addMaterial(Material* mat, Shader* shader = nullptr);
 	void assignMaterialtoMesh(Mesh* mesh, Material* material);
@@ -40,5 +42,6 @@ public:
 	void Update(float dt);
 	void Render(Camera& camera, bool useCameraShader);
 	void RenderScreenQuad();
+	void BufferStaticModels();
 };
 

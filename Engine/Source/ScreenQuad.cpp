@@ -43,7 +43,7 @@ ScreenQuad::ScreenQuad() : Mesh("ScreenQuad")
 	/*
 	This is Mr Toh level coding but I legit need a screen quad set up LOL
 	*/
-	float length = 1.f;
+	float length = 2.f;
 	Color color = Color(1, 1, 1);
 	Vertex v;
 	std::vector<Vertex> vertex_buffer_data;

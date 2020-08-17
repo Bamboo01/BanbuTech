@@ -19,7 +19,7 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &indexBuffer);
 }
 
-void Mesh::Init()
+void Mesh::Init(int numberofstaticmodels)
 {
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
@@ -40,11 +40,7 @@ void Mesh::Init()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 	glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
-	glBufferData(GL_ARRAY_BUFFER, 1000 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
-	if (StaticTransformMatrices.size() > 0)
-	{
-		glBufferSubData(GL_ARRAY_BUFFER, 0, StaticTransformMatrices.size() * sizeof(glm::mat4), &StaticTransformMatrices[0]);
-	}
+	glBufferData(GL_ARRAY_BUFFER, numberofstaticmodels * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(4);
 	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
@@ -63,6 +59,16 @@ void Mesh::Init()
 	glBindVertexArray(0);
 }
 
+void Mesh::BufferStaticModels()
+{
+	if (StaticTransformMatrices.size() > 0)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, StaticTransformMatrices.size() * sizeof(glm::mat4), &StaticTransformMatrices[0]);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+}
+
 void Mesh::Render()
 {
 	if (!enableRender)
@@ -77,11 +83,11 @@ void Mesh::Render()
 		glBufferSubData(GL_ARRAY_BUFFER, StaticTransformMatrices.size() * sizeof(glm::mat4), DynamicTransformMatrices.size() * sizeof(glm::mat4), &DynamicTransformMatrices[0]);
 	}
 	if (mode == DRAW_LINES)
-		glDrawElementsInstanced(GL_LINES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
+		glDrawElementsInstanced(GL_LINES, indexSize, GL_UNSIGNED_INT, 0, StaticTransformMatrices.size() + DynamicTransformMatrices.size());
 	else if (mode == DRAW_TRIANGLE_STRIP)
-		glDrawElementsInstanced(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
+		glDrawElementsInstanced(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0, StaticTransformMatrices.size() + DynamicTransformMatrices.size());
 	else
-		glDrawElementsInstanced(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0, DynamicTransformMatrices.size());
+		glDrawElementsInstanced(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0, StaticTransformMatrices.size() + DynamicTransformMatrices.size());
 
 	glBindVertexArray(0);
 }
