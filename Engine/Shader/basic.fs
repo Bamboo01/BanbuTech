@@ -59,7 +59,7 @@ void main()
     else
     {
         vec4 color = vec4(0, 0, 0, 0);
-        for (int i = 0; i < material.colorTextureNum; i++)
+        for (int i = 0; i <= material.colorTextureNum; i++)
         {
             vec4 textureColor = texture2D( material.colorTexture[i], TexCoord );
             if (textureColor.a < 0.1)
@@ -74,7 +74,7 @@ void main()
 
     if (FragColor.a < 0.1f)
 	{
-		discard;
+		FragColor = vec4(1,1,1,1);
 	}
     FragDepth = gl_FragCoord.z;
 }

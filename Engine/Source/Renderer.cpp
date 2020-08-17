@@ -54,10 +54,17 @@ void Renderer::Init()
 	/*Initialise all your shaders here*/
 
 	/*Add your materials*/
+	Material* boxmat = new Material();
+	boxmat->kColor = glm::vec3(0.1f, 1.f, 1.f);
+	boxmat->AssignTexture("Images//crate.tga");
+	boxmat->AssignTexture("Images//grass.tga");
+	materialManager.push_back(boxmat);
 
 	/*Assign your material their shaders here*/
+	addMaterial(boxmat);
 
 	/*Assign your meshes their materials here*/
+	assignMaterialtoMesh(meshManager->meshList[GEO_CUBE], boxmat);
 
 	/*Assignment of uniform blocks*/
 	for (auto shader : shaderManager)
@@ -157,7 +164,14 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 			}
 			shader->UseShader();
 			shader->UpdateShader(material);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			mesh->Render();
+
+			for (int i = 0; i < material->numTexture; i++)
+			{
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
 		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -190,7 +204,13 @@ void Renderer::RenderScreenQuad()
 	{
 		screenQuad->defaultScreenShader->UseShader();
 	}
+	/*Brute force, find a more elegant solution*/
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, screenQuad->screenTexture);
 	screenQuad->Render();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnable(GL_DEPTH_TEST);
 }
 

@@ -4,4 +4,4 @@
 #define NO_ENTITY INT_MAX
 
 using Entity = uint32_t;
-const Entity MAX_ENTITIES = 10000;
+const Entity MAX_ENTITIES = 50000;

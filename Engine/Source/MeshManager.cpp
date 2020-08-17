@@ -15,7 +15,10 @@ MeshManager::MeshManager()
 
 	//Initialise your meshes here
 	meshList[GEO_AXES] =  MeshBuilder::GenerateAxes("reference");
-	meshList[GEO_CUBE] =  MeshBuilder::GenerateCube("cube", Color(1.f, 1.f, 1.f));
+	meshList[GEO_AXES]->Init();
+
+	meshList[GEO_CUBE] =  MeshBuilder::GenerateQuad("cube", Color(1.f, 1.f, 1.f), 1.f);
+	meshList[GEO_CUBE]->Init(50000);
 
 	for (int i = 0; i < NUM_MESH; i++)
 	{
@@ -27,11 +30,6 @@ MeshManager::MeshManager()
 	}
 
 	assert(isfilled == true && "Some meshes have not been initialised! Review the command window for more information.");
-
-	for (int i = 0; i < NUM_MESH; i++)
-	{
-		meshList[i]->Init();
-	}
 }
 
 void MeshManager::Update(float dt)

@@ -75,8 +75,8 @@ void Mesh::Render()
 	{
 		return;
 	}
-	glBindVertexArray(vertexArray);
 
+	glBindVertexArray(vertexArray);
 	if (DynamicTransformMatrices.size() > 0)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
@@ -88,6 +88,5 @@ void Mesh::Render()
 		glDrawElementsInstanced(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0, StaticTransformMatrices.size() + DynamicTransformMatrices.size());
 	else
 		glDrawElementsInstanced(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0, StaticTransformMatrices.size() + DynamicTransformMatrices.size());
-
 	glBindVertexArray(0);
 }

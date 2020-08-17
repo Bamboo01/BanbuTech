@@ -193,16 +193,17 @@ public:
 		setVec3(MaterialUniforms[U_MATERIAL_DIFFUSE], material->kDiffuse);
 		setVec3(MaterialUniforms[U_MATERIAL_SPECULAR], material->kSpecular);
 		setFloat(MaterialUniforms[U_MATERIAL_SHININESS], material->kShininess);
-
+		setInt(MaterialUniforms[U_COLOR_TEXTURE_NUM], material->numTexture);
 		for (int i = 0; i < material->numTexture; i++)
 		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, material->colorTexture[i]);
 			setInt(MaterialUniforms[U_COLOR_TEXTURE0 + i], material->colorTexture[i]);
 		}
-		setInt(MaterialUniforms[U_COLOR_TEXTURE_NUM], material->numTexture);
-
 		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP], material->specularMap);
 		setInt(MaterialUniforms[U_MATERIAL_SPECULAR_MAP_ENABLED], material->specularMapEnabled);
 	}
+
     void UseShader()
     {
         glUseProgram(ID);
