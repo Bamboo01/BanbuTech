@@ -33,7 +33,7 @@ Camera::Camera(
 	}
 	else
 	{
-		ProjectionMatrix = glm::perspective(FOV, (float)(viewWidth / viewHeight), 0.1f, 1000.f);
+		ProjectionMatrix = glm::perspective(FOV, ((float)viewWidth / (float)viewHeight), 0.1f, 1000.f);
 	}
 
 	FBO = nullptr;

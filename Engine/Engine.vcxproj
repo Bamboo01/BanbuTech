@@ -179,9 +179,9 @@
     <ClCompile Include="Source\MeshManager.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SpriteAnimation.cpp" />
-    <ClCompile Include="Source\TextRenderer.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\TransformSystem.cpp" />
+    <ClCompile Include="Source\TextMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\RenderSystem.h" />
@@ -216,11 +216,11 @@
     <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\System.h" />
     <ClInclude Include="Source\SystemManager.h" />
-    <ClInclude Include="Source\TextRenderer.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\TransformSystem.h" />
     <ClInclude Include="Source\Transform.h" />
+    <ClInclude Include="Source\TextMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">

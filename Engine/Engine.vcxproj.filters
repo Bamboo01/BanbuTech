@@ -16,9 +16,6 @@
     <Filter Include="Meshes">
       <UniqueIdentifier>{cf092f62-3074-466f-8d70-cd972bd376ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Meshes\Text">
-      <UniqueIdentifier>{0369c8e4-e705-4fb5-ba88-5c87598f4ed2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Meshes\AnimatedSprite">
       <UniqueIdentifier>{dff78375-d62b-45ab-b1dd-5dfbb040d268}</UniqueIdentifier>
     </Filter>
@@ -45,15 +42,6 @@
     </Filter>
     <Filter Include="Core\Core Modules\MeshManager\LoadTGA">
       <UniqueIdentifier>{3aeaf02f-4bfc-4134-93d5-e8fedccb1fbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Core Modules\MeshManager\Mesh Stuff">
-      <UniqueIdentifier>{ab29f161-5347-4b97-be3e-56ee117bf094}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Core Modules\MeshManager\Mesh Stuff\Mesh">
-      <UniqueIdentifier>{0ece835e-13cc-491d-83ea-258f418f2315}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Core Modules\MeshManager\Mesh Stuff\MeshBuilder">
-      <UniqueIdentifier>{fb25909a-eb97-4f6d-826d-65f7ac94a46f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Core Modules\Timer">
       <UniqueIdentifier>{30f3bfbb-67d9-4f51-b005-8455cb832e1b}</UniqueIdentifier>
@@ -109,6 +97,18 @@
     <Filter Include="Core\Core Systems\RenderSystem">
       <UniqueIdentifier>{917e726b-6c70-4389-a8a8-2ce5834e5eca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Mesh">
+      <UniqueIdentifier>{ab29f161-5347-4b97-be3e-56ee117bf094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Mesh\Mesh">
+      <UniqueIdentifier>{0ece835e-13cc-491d-83ea-258f418f2315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Mesh\MeshBuilder">
+      <UniqueIdentifier>{fb25909a-eb97-4f6d-826d-65f7ac94a46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes\TextMesh">
+      <UniqueIdentifier>{0369c8e4-e705-4fb5-ba88-5c87598f4ed2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -155,13 +155,10 @@
       <Filter>Core\Core Components\Camera\FBO</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mesh.cpp">
-      <Filter>Core\Core Modules\MeshManager\Mesh Stuff\Mesh</Filter>
+      <Filter>Core\Mesh\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Source\MeshBuilder.cpp">
-      <Filter>Core\Core Modules\MeshManager\Mesh Stuff\MeshBuilder</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TextRenderer.cpp">
-      <Filter>Meshes\Text</Filter>
+      <Filter>Core\Mesh\MeshBuilder</Filter>
     </ClCompile>
     <ClCompile Include="Source\ScreenQuad.cpp">
       <Filter>Core\Core Modules\Renderer\ScreenQuad</Filter>
@@ -175,6 +172,7 @@
     <ClCompile Include="Source\RenderSystem.cpp">
       <Filter>Core\Core Systems\RenderSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TextMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Timer.h">
@@ -229,7 +227,7 @@
       <Filter>Meshes\AnimatedSprite</Filter>
     </ClInclude>
     <ClInclude Include="Source\Vertex.h">
-      <Filter>Core\Core Modules\MeshManager\Mesh Stuff</Filter>
+      <Filter>Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Source\MeshManager.h">
       <Filter>Core\Core Modules\MeshManager</Filter>
@@ -262,13 +260,10 @@
       <Filter>Core\Core Components\Camera\FBO</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mesh.h">
-      <Filter>Core\Core Modules\MeshManager\Mesh Stuff\Mesh</Filter>
+      <Filter>Core\Mesh\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Source\MeshBuilder.h">
-      <Filter>Core\Core Modules\MeshManager\Mesh Stuff\MeshBuilder</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TextRenderer.h">
-      <Filter>Meshes\Text</Filter>
+      <Filter>Core\Mesh\MeshBuilder</Filter>
     </ClInclude>
     <ClInclude Include="Source\ScreenQuad.h">
       <Filter>Core\Core Modules\Renderer\ScreenQuad</Filter>
@@ -288,5 +283,6 @@
     <ClInclude Include="Source\RenderData.h">
       <Filter>Core\Core Components\Render</Filter>
     </ClInclude>
+    <ClInclude Include="Source\TextMesh.h" />
   </ItemGroup>
 </Project>

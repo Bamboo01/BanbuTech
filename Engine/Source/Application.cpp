@@ -47,6 +47,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 void resize_callback(GLFWwindow* window, int w, int h)
 {
+	m_width = w;
+	m_height = h;
 	glViewport(0, 0, w, h);
 }
 
