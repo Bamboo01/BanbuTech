@@ -32,7 +32,7 @@ void CameraSystem::Update(float dt)
 		{
 			camera.position.x += dt * 50.f;
 		}
-		
+
 		glm::mat4 rot(1.f);
 		glm::vec3 rotation = glm::radians(camera.rotation);
 

@@ -1,5 +1,5 @@
 #include "SceneTest.h"
-
+#include "Application.h"
 
 void SceneTest::Init()
 {

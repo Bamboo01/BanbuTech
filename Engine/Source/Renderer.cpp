@@ -3,6 +3,7 @@
 #include "Application.h"
 #include <glm.hpp>
 #include <gtc/type_ptr.hpp>
+#include <gtc/matrix_transform.hpp>
 
 void Renderer::addMaterial(Material* mat, Shader* shader)
 {
@@ -186,6 +187,14 @@ void Renderer::Render(Camera& camera, bool useCameraShader)
 
 void Renderer::RenderScreenQuad()
 {
+	float longerside = (Application::GetWindowHeight() > Application::GetWindowHeight()) ? Application::GetWindowHeight() : Application::GetWindowWidth();
+	float offsetx = (Application::GetWindowWidth() - longerside) * 0.5f;
+	float offsety = (Application::GetWindowHeight() - longerside) * 0.5f;
+
+
+	glViewport(offsetx, offsety, longerside, longerside);
+
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -193,6 +202,7 @@ void Renderer::RenderScreenQuad()
 	glCullFace(GL_BACK);
 	glDisable(GL_DEPTH_TEST);
 
+	/*Code stink, SP3 rush. Organise for next Banbutech version thanks*/
 	if (postProcessingShader)
 	{
 		postProcessingShader->UseShader();
